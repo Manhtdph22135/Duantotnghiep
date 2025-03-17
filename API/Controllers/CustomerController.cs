@@ -3,6 +3,7 @@ using API.Context;
 using API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
@@ -58,7 +59,9 @@ namespace API.Controllers
             {
                 if (!CustomerExists(id))
                 {
-                    return NotFound();
+                    _contextShop.Customers.Update(customer);
+                    _contextShop.SaveChanges();
+                    return Ok("Cập Nhật Thành Công");
                 }
                 else
                 {
@@ -86,13 +89,13 @@ namespace API.Controllers
             var customer = await _contextShop.Customers.FindAsync(id);
             if (customer == null)
             {
-                return NotFound();
+                return NotFound("Không tìm thấy id khách hàng");
             }
 
             _contextShop.Customers.Remove(customer);
             await _contextShop.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Xoá Thành Công");
         }
 
         private bool CustomerExists(int id)
