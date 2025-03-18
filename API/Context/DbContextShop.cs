@@ -16,11 +16,17 @@ public partial class DbContextShop : DbContext
     {
     }
 
+    public virtual DbSet<Bill> Bills { get; set; }
+
+    public virtual DbSet<BillDetail> BillDetails { get; set; }
+
     public virtual DbSet<Color> Colors { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<Material> Materials { get; set; }
+
+    public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
@@ -32,26 +38,45 @@ public partial class DbContextShop : DbContext
 
     public virtual DbSet<Staff> Staffs { get; set; }
 
+    public virtual DbSet<Transport> Transports { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=SEELEVOLLEREI;Initial Catalog=Duantotnghiep;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=DEVMANH;Initial Catalog=Duantotnghiep;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Bill>(entity =>
+        {
+            entity.HasOne(d => d.Customer).WithMany(p => p.Bills).HasConstraintName("FK_Bills_Customers");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Bills).HasConstraintName("FK_Bills_Order");
+
+            entity.HasOne(d => d.Staff).WithMany(p => p.Bills).HasConstraintName("FK_Bills_Staffs");
+
+            entity.HasOne(d => d.Transport).WithMany(p => p.Bills).HasConstraintName("FK_Bills_Transport");
+        });
+
+        modelBuilder.Entity<BillDetail>(entity =>
+        {
+            entity.HasOne(d => d.Bill).WithMany(p => p.BillDetails).HasConstraintName("FK_BillDetails_Bills");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.BillDetails).HasConstraintName("FK_BillDetails_Products");
+        });
+
         modelBuilder.Entity<Color>(entity =>
         {
             entity.HasKey(e => e.ColorId).HasName("PK__Colors__8DA7676D341FD042");
         });
 
-        modelBuilder.Entity<Customer>(entity =>
-        {
-            entity.HasKey(c => c.CustomerId);
-            entity.Property(e => e.CustomerId).ValueGeneratedOnAdd();
-        });
-
         modelBuilder.Entity<Material>(entity =>
         {
             entity.HasKey(e => e.MaterialId).HasName("PK__Material__C506131791209DD9");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasOne(d => d.Customer).WithMany(p => p.Orders).HasConstraintName("FK_Order_Customers");
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -84,11 +109,6 @@ public partial class DbContextShop : DbContext
         modelBuilder.Entity<Size>(entity =>
         {
             entity.HasKey(e => e.SizeId).HasName("PK__Sizes__83BD095A5DB06CC4");
-        });
-
-        modelBuilder.Entity<Staff>(entity =>
-        {
-            entity.Property(e => e.StaffId).ValueGeneratedOnAdd();
         });
 
         OnModelCreatingPartial(modelBuilder);

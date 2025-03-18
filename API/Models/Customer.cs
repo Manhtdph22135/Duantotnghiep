@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Models;
 
-[Keyless]
 public partial class Customer
 {
     [Key]
@@ -40,4 +39,10 @@ public partial class Customer
     public string? RankMember { get; set; }
 
     public int? Point { get; set; }
+
+    [InverseProperty("Customer")]
+    public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
+
+    [InverseProperty("Customer")]
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

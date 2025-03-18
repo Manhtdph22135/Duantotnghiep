@@ -28,6 +28,9 @@ public partial class Product
 
     public int? Statuss { get; set; }
 
+    [InverseProperty("Product")]
+    public virtual ICollection<BillDetail> BillDetails { get; set; } = new List<BillDetail>();
+
     [ForeignKey("CategoryId")]
     [InverseProperty("Products")]
     public virtual ProductCategory? Category { get; set; }

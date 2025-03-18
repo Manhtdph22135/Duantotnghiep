@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Models;
 
-[Keyless]
 public partial class Staff
 {
+    [Key]
     [Column("StaffID")]
     public int StaffId { get; set; }
 
@@ -38,4 +38,7 @@ public partial class Staff
     public DateOnly? CreateAt { get; set; }
 
     public DateOnly? UpdateAt { get; set; }
+
+    [InverseProperty("Staff")]
+    public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
 }
