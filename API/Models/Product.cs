@@ -22,11 +22,11 @@ public partial class Product
     [Column(TypeName = "decimal(10, 2)")]
     public decimal? Price { get; set; }
 
-    public DateOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public DateOnly? UpdateAt { get; set; }
+    public DateTime? UpdateAt { get; set; }
 
-    public int? Statuss { get; set; }
+    public bool? Status { get; set; }
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Products")]

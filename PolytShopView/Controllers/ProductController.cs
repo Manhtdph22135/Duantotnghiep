@@ -88,7 +88,7 @@ namespace PolyShopView.Controllers
         // Gửi yêu cầu API để tạo sản phẩm
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(Product product, DateTime dateTime)
         {
             if (!ModelState.IsValid)
             {
@@ -99,8 +99,8 @@ namespace PolyShopView.Controllers
                 return View(product);
             }
 
-            product.CreatedAt = DateOnly.FromDateTime(DateTime.Now);
-            product.UpdateAt = DateOnly.FromDateTime(DateTime.Now);
+            product.CreatedAt = DateTime.Now;
+            product.UpdateAt = DateTime.Now;
             var jsonContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync(API_BASE_URL, jsonContent);
@@ -164,7 +164,7 @@ namespace PolyShopView.Controllers
 
                 // Giữ nguyên CreatedAt, chỉ cập nhật UpdateAt
                 product.CreatedAt = existingProduct.CreatedAt;
-                product.UpdateAt = DateOnly.FromDateTime(DateTime.Now);
+                product.UpdateAt = DateTime.Now;
 
                 var jsonContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
                 var response = await _httpClient.PutAsync($"{API_BASE_URL}/{id}", jsonContent);
