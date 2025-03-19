@@ -1,8 +1,180 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+
+<body ng-app="myApp">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 bg-light vh-100 p-3 position-fixed" id="sidebar">
+                <img src="./img/Screenshot 2025-03-12 231334.png" alt="Logo" class="mb-3" width="100">
+                <h4 class="fw-bold text-start mb-4">Quản Lý</h4>
+                <ul class="nav flex-column text-start">
+                    <li class="nav-item">
+                        <a href="#!/nhanvien" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="nhanvien.html">Nhân viên</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/khachhang" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="khachhang.html">Khách hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/uudai" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="uudai.html">Ưu đãi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/sanpham" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="sanpham.html">Sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/donhang" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="donhang.html">Đơn hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/baiviet" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="baiviet.html">Bài viết</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/banhang" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="banhang.html">Bán hàng tại quầy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/hoadon" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="hoadon.html">Hóa đơn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/trahang" class="nav-link text-dark fw-bold border-bottom py-2"
+                           data-page="trahang.html">Trả hàng hoàn tiền</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!/thongke" class="nav-link text-dark fw-bold py-2"
+                           data-page="thongke.html">Thống kê</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content Area -->
+            <div class="col-md-10 offset-md-2 p-4" id="content" style="margin-top: 20px;">
+                <!-- User Menu -->
+                <div class="d-flex justify-content-end mb-3">
+                    <div class="dropdown">
+                        <button class="btn border-0 dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle fs-4"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Divider between user icon and content -->
+                <hr class="my-3 border-1 border-secondary-subtle">
+                <main class="container">
+                    <div ng-view></div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./libs/angular.min.js"></script>
+    <script src="./libs/angular.route.min.js"></script>
+
+</body>
+
+
+
+
+
+<script>
+    let myApp = angular.module('myApp', ['ngRoute']);
+    myApp.config(function ($routeProvider) {
+        $routeProvider
+            .when(
+                '/Product',
+                {
+                    templateUrl: "views/Product/index",
+                    controller: 'ProductController'
+                }
+            )
+            .when(
+                '/baiviet',
+                {
+                    templateUrl: "view/baiviet.html",
+                    controller: ' BaiVietController'
+                }
+            )
+            .when(
+                '/uudai',
+                {
+                    templateUrl: "view/uudai.html",
+                    controller: ' UuDaiController'
+                }
+            )
+            .when(
+                '/nhanvien',
+                {
+                    templateUrl: "view/nhanvien.html",
+                    controller: ' NhanVienController'
+                }
+            )
+            .when(
+                '/sanpham',
+                {
+                    templateUrl: "Views/Product/index.html",
+                    controller:  'ProductController'
+                }
+            )
+            .when(
+                '/khachhang',
+                {
+                    templateUrl: "view/khachhang.html",
+                    controller: 'KhachHangController'
+                }
+            )
+            .when(
+                '/donhang',
+                {
+                    templateUrl: "view/donhang.html",
+                    controller: 'DonHangController'
+                }
+            )
+            .when(
+                '/banhang',
+                {
+                    templateUrl: "view/banhang.html",
+                    controller: 'BanHangController'
+                }
+            )
+            .when(
+                '/trahang',
+                {
+                    templateUrl: "view/trahang.html",
+                    controller: 'TraHangController'
+                }
+            )
+            .when(
+                '/thongke',
+                {
+                    templateUrl: "view/thongke.html",
+                    controller: 'ThongKeController'
+                }
+            )
+            .otherwise({
+                redirectTo: 'Views/Home/Index.html'
+            })
+    });
+</script>
+
+</html>
