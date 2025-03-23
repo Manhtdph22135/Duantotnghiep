@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PolyShopView.Controllers
+namespace PolyShopView.Controllers.Product
 {
     public class ProductDetailsController : Controller
     {

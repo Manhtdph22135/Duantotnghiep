@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Models;
 
-[Index("SizeName", Name = "UQ__Sizes__619EFC3E38E96F8C", IsUnique = true)]
+[Index("SizeName", Name = "UQ__Sizes__619EFC3E5028ADBC", IsUnique = true)]
 public partial class Size
 {
     [Key]
@@ -14,8 +14,7 @@ public partial class Size
     public int SizeId { get; set; }
 
     [StringLength(50)]
-    [Unicode(false)]
-    public string? SizeName { get; set; }
+    public string SizeName { get; set; } = null!;
 
     [InverseProperty("Size")]
     public virtual ICollection<ProductDetail> ProductDetails { get; set; } = new List<ProductDetail>();

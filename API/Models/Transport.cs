@@ -14,10 +14,10 @@ public partial class Transport
     public int TransportId { get; set; }
 
     [StringLength(50)]
-    public string? TransportMethod { get; set; }
+    public string TransportMethod { get; set; } = null!;
 
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal? Cost { get; set; }
+    [Column(TypeName = "decimal(18, 2)")]
+    public decimal Cost { get; set; }
 
     [InverseProperty("Transport")]
     public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();

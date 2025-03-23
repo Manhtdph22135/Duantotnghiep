@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Models;
 
-[Index("CategoryName", Name = "UQ__ProductC__8517B2E062CBD33F", IsUnique = true)]
+[Index("CategoryName", Name = "UQ__ProductC__8517B2E0B01BA20C", IsUnique = true)]
 public partial class ProductCategory
 {
     [Key]
@@ -14,7 +14,7 @@ public partial class ProductCategory
     public int CategoryId { get; set; }
 
     [StringLength(100)]
-    public string? CategoryName { get; set; }
+    public string CategoryName { get; set; } = null!;
 
     [StringLength(50)]
     public string? Trademark { get; set; }

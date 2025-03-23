@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PolyShopView.Controllers
+namespace PolyShopView.Controllers.Product
 {
     public class ProductController : Controller
     {
@@ -24,11 +24,11 @@ namespace PolyShopView.Controllers
             var response = await _httpClient.GetAsync(API_BASE_URL);
             if (!response.IsSuccessStatusCode)
             {
-                return View(new List<Product>());
+                return View(new List<API.Models.Product>());
             }
 
             var apiData = await response.Content.ReadAsStringAsync();
-            var products = JsonConvert.DeserializeObject<List<Product>>(apiData);
+            var products = JsonConvert.DeserializeObject<List<API.Models.Product>>(apiData);
             return View(products);
         }
 
@@ -42,7 +42,7 @@ namespace PolyShopView.Controllers
             if (!productResponse.IsSuccessStatusCode) return NotFound();
 
             var productData = await productResponse.Content.ReadAsStringAsync();
-            var product = JsonConvert.DeserializeObject<Product>(productData);
+            var product = JsonConvert.DeserializeObject<API.Models.Product>(productData);
             if (product == null) return NotFound();
 
             // Lấy danh mục sản phẩm từ API
@@ -88,7 +88,7 @@ namespace PolyShopView.Controllers
         // Gửi yêu cầu API để tạo sản phẩm
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(API.Models.Product product)
         {
             if (!ModelState.IsValid)
             {
@@ -99,10 +99,12 @@ namespace PolyShopView.Controllers
                 return View(product);
             }
 
-            product.CreatedAt = DateOnly.FromDateTime(DateTime.Now);
-            product.UpdateAt = DateOnly.FromDateTime(DateTime.Now);
+            product.CreatedAt = DateTime.Now;
+            product.UpdateAt = DateTime.Now;
             var jsonContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
 
+            product.CreatedAt = DateTime.Now;
+            product.UpdateAt = DateTime.Now;
             var response = await _httpClient.PostAsync(API_BASE_URL, jsonContent);
 
             if (response.IsSuccessStatusCode)
@@ -122,7 +124,7 @@ namespace PolyShopView.Controllers
             if (!productResponse.IsSuccessStatusCode) return NotFound();
 
             var productData = await productResponse.Content.ReadAsStringAsync();
-            var product = JsonConvert.DeserializeObject<Product>(productData);
+            var product = JsonConvert.DeserializeObject<API.Models.Product>(productData);
 
             if (product == null) return NotFound();
 
@@ -148,7 +150,7 @@ namespace PolyShopView.Controllers
         // Gửi yêu cầu API để cập nhật sản phẩm
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Product product)
+        public async Task<IActionResult> Edit(int id, API.Models.Product product)
         {
             if (id != product.ProductId) return NotFound();
 
@@ -159,12 +161,12 @@ namespace PolyShopView.Controllers
                 if (!existingResponse.IsSuccessStatusCode) return NotFound();
 
                 var existingData = await existingResponse.Content.ReadAsStringAsync();
-                var existingProduct = JsonConvert.DeserializeObject<Product>(existingData);
+                var existingProduct = JsonConvert.DeserializeObject<API.Models.Product>(existingData);
                 if (existingProduct == null) return NotFound();
 
                 // Giữ nguyên CreatedAt, chỉ cập nhật UpdateAt
                 product.CreatedAt = existingProduct.CreatedAt;
-                product.UpdateAt = DateOnly.FromDateTime(DateTime.Now);
+                product.UpdateAt = DateTime.Now;
 
                 var jsonContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
                 var response = await _httpClient.PutAsync($"{API_BASE_URL}/{id}", jsonContent);
@@ -185,7 +187,7 @@ namespace PolyShopView.Controllers
             if (!productResponse.IsSuccessStatusCode) return NotFound();
 
             var productData = await productResponse.Content.ReadAsStringAsync();
-            var product = JsonConvert.DeserializeObject<Product>(productData);
+            var product = JsonConvert.DeserializeObject<API.Models.Product>(productData);
             if (product == null) return NotFound();
 
             // Lấy danh mục sản phẩm từ API

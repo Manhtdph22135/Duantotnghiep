@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.UpdateAt)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Statuss)
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Category)
@@ -49,10 +49,10 @@
                 @Html.DisplayFor(modelItem => item.UpdateAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Statuss)
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |

@@ -15,22 +15,22 @@ public partial class BillDetail
     [Column("BillID")]
     public int? BillId { get; set; }
 
-    [Column("ProductID")]
-    public int? ProductId { get; set; }
+    [Column("ProductDetailID")]
+    public int? ProductDetailId { get; set; }
 
-    public int? Quantity { get; set; }
+    public int Quantity { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal? UnitPrice { get; set; }
+    [Column(TypeName = "decimal(18, 2)")]
+    public decimal UnitPrice { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
+    [Column(TypeName = "decimal(29, 2)")]
     public decimal? Total { get; set; }
 
     [ForeignKey("BillId")]
     [InverseProperty("BillDetails")]
     public virtual Bill? Bill { get; set; }
 
-    [ForeignKey("ProductId")]
+    [ForeignKey("ProductDetailId")]
     [InverseProperty("BillDetails")]
-    public virtual Product? Product { get; set; }
+    public virtual ProductDetail? ProductDetail { get; set; }
 }

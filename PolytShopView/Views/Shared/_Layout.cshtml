@@ -29,7 +29,7 @@
                     <a asp-controller="Product" asp-action="Index" class="nav-link text-dark fw-bold border-bottom py-2">Sản phẩm</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#!/donhang" class="nav-link text-dark fw-bold border-bottom py-2">Đơn hàng</a>
+                    <a asp-controller="BillDetails" asp-action="Index" class="nav-link text-dark fw-bold border-bottom py-2">Đơn hàng</a>
                 </li>
                 <li class="nav-item">
                     <a href="#!/baiviet" class="nav-link text-dark fw-bold border-bottom py-2">Bài viết</a>
@@ -38,7 +38,7 @@
                     <a href="#!/banhang" class="nav-link text-dark fw-bold border-bottom py-2">Bán hàng tại quầy</a>
                 </li>
                 <li class="nav-item">
-                    <a asp-controller="Customer" asp-action="Index" class="nav-link text-dark fw-bold border-bottom py-2">Hóa đơn</a>
+                    <a asp-controller="Bills" asp-action="GetBillDOT" class="nav-link text-dark fw-bold border-bottom py-2">Hóa đơn</a>
                 </li>
                 <li class="nav-item">
                     <a href="#!/trahang" class="nav-link text-dark fw-bold border-bottom py-2">Trả hàng hoàn tiền</a>
@@ -72,6 +72,33 @@
             </main>
         </div>
     </div>
+        <section class="maker-section py-4 bg-light">
+            <div class="container text-center">
+                <img src="./img/foter.png" alt="$MAKER Logo" class="mb-3">
+
+            </div>
+        </section>
+
+<footer class="py-4 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <h5>Information</h5>
+                <p>Hà Nội, Việt Nam</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Service</h5>
+                <p>Hỗ trợ đổi/trả hàng</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Follow us on</h5>
+                <a href="#" class="text-white d-inline-block me-3"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white d-inline-block me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white d-inline-block"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
 </div>
 </body>
 </html>

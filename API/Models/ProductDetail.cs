@@ -15,18 +15,21 @@ public partial class ProductDetail
     [Column("ProductID")]
     public int? ProductId { get; set; }
 
-    [Column("ColorID")]
-    public int? ColorId { get; set; }
-
     [Column("SizeID")]
     public int? SizeId { get; set; }
+
+    [Column("ColorID")]
+    public int? ColorId { get; set; }
 
     [Column("MaterialID")]
     public int? MaterialId { get; set; }
 
-    public int? StockQuantity { get; set; }
+    public int StockQuantity { get; set; }
 
     public string? Image { get; set; }
+
+    [InverseProperty("ProductDetail")]
+    public virtual ICollection<BillDetail> BillDetails { get; set; } = new List<BillDetail>();
 
     [ForeignKey("ColorId")]
     [InverseProperty("ProductDetails")]

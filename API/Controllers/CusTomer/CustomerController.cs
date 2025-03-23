@@ -1,12 +1,11 @@
-﻿
-using API.Context;
+﻿using API.Context;
 using API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers
+namespace API.Controllers.CusTomer
 {
     [Route("api/[controller]")]
     [ApiController]

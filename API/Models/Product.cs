@@ -13,23 +13,21 @@ public partial class Product
     public int ProductId { get; set; }
 
     [StringLength(150)]
-    [Unicode(false)]
-    public string? ProductName { get; set; }
+    public string ProductName { get; set; } = null!;
 
     [Column("CategoryID")]
     public int? CategoryId { get; set; }
 
     [Column(TypeName = "decimal(10, 2)")]
-    public decimal? Price { get; set; }
+    public decimal Price { get; set; }
 
-    public DateOnly? CreatedAt { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? CreatedAt { get; set; }
 
-    public DateOnly? UpdateAt { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? UpdateAt { get; set; }
 
-    public int? Statuss { get; set; }
-
-    [InverseProperty("Product")]
-    public virtual ICollection<BillDetail> BillDetails { get; set; } = new List<BillDetail>();
+    public bool? Status { get; set; }
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Products")]
