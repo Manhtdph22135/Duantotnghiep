@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 
-namespace API.Controllers
+namespace API.Controllers.Products
 {
     [Route("api/[controller]")]
     public class ProductController : Controller
@@ -35,7 +35,7 @@ namespace API.Controllers
         }
         // PUT: api/Customer/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducts(int id,[FromBody] Product product)
+        public async Task<IActionResult> PutProducts(int id, [FromBody] Product product)
         {
             if (id != product.ProductId)
             {
@@ -92,5 +92,4 @@ namespace API.Controllers
             return _contextShop.Products.Any(e => e.ProductId == id);
         }
     }
-
 }

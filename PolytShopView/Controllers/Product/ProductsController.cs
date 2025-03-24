@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using API.Context;
 using API.Models;
 
-namespace PolyShopView.Controllers
+namespace PolyShopView.Controllers.Product
 {
     public class ProductsController : Controller
     {
@@ -57,7 +57,7 @@ namespace PolyShopView.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,CategoryId,Price,CreatedAt,UpdateAt,Statuss")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,CategoryId,Price,CreatedAt,UpdateAt,Statuss")] API.Models.Product product)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace PolyShopView.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,CategoryId,Price,CreatedAt,UpdateAt,Statuss")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,CategoryId,Price,CreatedAt,UpdateAt,Statuss")] API.Models.Product product)
         {
             if (id != product.ProductId)
             {

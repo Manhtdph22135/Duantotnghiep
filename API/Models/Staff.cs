@@ -3,39 +3,51 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace API.Models;
 
-[Keyless]
+[Index("Phone", Name = "UQ__Staffs__5C7E359ECB14BC4D", IsUnique = true)]
+[Index("Email", Name = "UQ__Staffs__A9D105342EA7D79F", IsUnique = true)]
 public partial class Staff
 {
+    [Key]
     [Column("StaffID")]
     public int StaffId { get; set; }
 
-    [Column("RoleID")]
-    public int? RoleId { get; set; }
-
     [StringLength(100)]
-    public string? FullName { get; set; }
+    public string FullName { get; set; } = null!;
 
     [StringLength(50)]
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
-    public int? Phone { get; set; }
+    [StringLength(15)]
+    [Unicode(false)]
+    public string Phone { get; set; } = null!;
 
-    public int? Gender { get; set; }
+    public bool Gender { get; set; }
 
-    [StringLength(50)]
+    [StringLength(255)]
     public string? Address { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal? Salary { get; set; }
+    [Column(TypeName = "decimal(18, 2)")]
+    public decimal Salary { get; set; }
 
-    public int? Position { get; set; }
+    [StringLength(50)]
+    public string? Position { get; set; }
 
     public DateOnly? HireDate { get; set; }
 
-    public DateOnly? CreateAt { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? CreateAt { get; set; }
 
-    public DateOnly? UpdateAt { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? UpdateAt { get; set; }
+
+    [Column("RoleID")]
+    public int RoleId { get; set; }
+
+    [InverseProperty("Staff")]
+    [JsonIgnore]
+    public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
 }

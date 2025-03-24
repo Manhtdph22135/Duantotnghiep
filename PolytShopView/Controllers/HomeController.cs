@@ -1,24 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace PolyShopView.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly HttpClient _httpClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(HttpClient httpClient)
         {
-            _logger = logger;
+            _httpClient = httpClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            var response = await _httpClient.GetAsync("https://localhost:7055/trang-chu");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var productss = JsonConvert.DeserializeObject<IEnumerable<API.DOT.HomeDOT>>(content);
+                return View(productss);
+            }
             return View();
         }
     }

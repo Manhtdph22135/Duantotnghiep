@@ -6,38 +6,50 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Models;
 
-[Keyless]
+[Index("Phone", Name = "UQ__Customer__5C7E359E9B9944BC", IsUnique = true)]
+[Index("Email", Name = "UQ__Customer__A9D10534BCF9D50C", IsUnique = true)]
 public partial class Customer
 {
     [Key]
     [Column("CustomerID")]
     public int CustomerId { get; set; }
 
-    [Column("RoleID")]
-    public int? RoleId { get; set; }
-
     [StringLength(100)]
-    public string? FullName { get; set; }
+    public string FullName { get; set; } = null!;
 
     [StringLength(50)]
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
-    public int? Phone { get; set; }
+    [StringLength(15)]
+    [Unicode(false)]
+    public string Phone { get; set; } = null!;
 
-    public int? Gender { get; set; }
+    public bool Gender { get; set; }
 
     [Column("DOB")]
     public DateOnly? Dob { get; set; }
 
-    [StringLength(50)]
+    [StringLength(255)]
     public string? Address { get; set; }
 
-    public DateOnly? CreateAt { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? CreateAt { get; set; }
 
-    public DateOnly? UdateAt { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? UpdateAt { get; set; }
 
     [StringLength(50)]
     public string? RankMember { get; set; }
 
     public int? Point { get; set; }
+
+    [Column("RoleID")]
+    public int RoleId { get; set; }
+
+    [InverseProperty("Customer")]
+    public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
+
+    [ForeignKey("RoleId")]
+    [InverseProperty("Customers")]
+    public virtual Role Role { get; set; } = null!;
 }

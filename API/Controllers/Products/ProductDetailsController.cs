@@ -4,7 +4,7 @@ using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers
+namespace API.Controllers.Products
 {
     [Route("api/[controller]")]
     public class ProductDetailsController : Controller

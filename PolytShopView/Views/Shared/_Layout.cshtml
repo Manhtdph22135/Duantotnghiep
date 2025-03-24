@@ -3,47 +3,102 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PolytShopView</title>
+    <title>@ViewData["Title"] - PolytShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PolytShopView.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Customer" asp-action="Index">PolytShopView</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 bg-light vh-100 p-3 position-fixed" id="sidebar">
+            <img src="~/img/Screenshot 2025-03-12 231334.png" alt="Logo" class="mb-3" width="100">
+            <h4 class="fw-bold text-start mb-4">Quản Lý</h4>
+            <ul class="nav flex-column text-start">
+                <li class="nav-item">
+                    <a href="#!/nhanvien" class="nav-link text-dark fw-bold border-bottom py-2">Nhân viên</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Customer" asp-action="Index" class="nav-link text-dark fw-bold border-bottom py-2">Khách hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/uudai" class="nav-link text-dark fw-bold border-bottom py-2">Ưu đãi</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Product" asp-action="Index" class="nav-link text-dark fw-bold border-bottom py-2">Sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="BillDetails" asp-action="Index" class="nav-link text-dark fw-bold border-bottom py-2">Đơn hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/baiviet" class="nav-link text-dark fw-bold border-bottom py-2">Bài viết</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/banhang" class="nav-link text-dark fw-bold border-bottom py-2">Bán hàng tại quầy</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Bills" asp-action="GetBillDOT" class="nav-link text-dark fw-bold border-bottom py-2">Hóa đơn</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/trahang" class="nav-link text-dark fw-bold border-bottom py-2">Trả hàng hoàn tiền</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/thongke" class="nav-link text-dark fw-bold py-2">Thống kê</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content Area -->
+        <div class="col-md-10 offset-md-2 p-4" id="content" style="margin-top: 20px;">
+            <!-- User Menu -->
+            <div class="d-flex justify-content-end mb-3">
+                <div class="dropdown">
+                    <button class="btn border-0 dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle fs-4"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - PolytShopView - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <!-- Divider between user icon and content -->
+            <hr class="my-3 border-1 border-secondary-subtle">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </div>
+        <section class="maker-section py-4 bg-light">
+            <div class="container text-center">
+                <img src="./img/foter.png" alt="$MAKER Logo" class="mb-3">
+
+            </div>
+        </section>
+
+<footer class="py-4 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <h5>Information</h5>
+                <p>Hà Nội, Việt Nam</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Service</h5>
+                <p>Hỗ trợ đổi/trả hàng</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Follow us on</h5>
+                <a href="#" class="text-white d-inline-block me-3"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white d-inline-block me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white d-inline-block"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
 </body>
 </html>

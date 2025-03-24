@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace PolyShopView.Controllers
+namespace PolyShopView.Controllers.Product
 {
     public class ProductDetailsController : Controller
     {
