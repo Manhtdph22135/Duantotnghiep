@@ -28,11 +28,15 @@ public partial class DbContextShop : DbContext
 
     public virtual DbSet<Material> Materials { get; set; }
 
+    public virtual DbSet<Post> Posts { get; set; }
+
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<ProductCategory> ProductCategories { get; set; }
 
     public virtual DbSet<ProductDetail> ProductDetails { get; set; }
+
+    public virtual DbSet<Promotion> Promotions { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -44,7 +48,7 @@ public partial class DbContextShop : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DEVMANH;Initial Catalog=Duantotnghiep;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=DEVMANH;Initial Catalog=Duantotnghiep;Integrated Security=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,6 +57,7 @@ public partial class DbContextShop : DbContext
             entity.HasKey(e => e.AccountId).HasName("PK__Accounts__349DA5866CC4CC0D");
 
             entity.Property(e => e.CreateAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.RoleId).HasDefaultValue(3);
 
             entity.HasOne(d => d.Role).WithMany(p => p.Accounts)
                 .OnDelete(DeleteBehavior.Cascade)
@@ -116,6 +121,13 @@ public partial class DbContextShop : DbContext
             entity.HasKey(e => e.MaterialId).HasName("PK__Material__C5061317129D5857");
         });
 
+        modelBuilder.Entity<Post>(entity =>
+        {
+            entity.HasKey(e => e.PostId).HasName("PK__Post__AA12603832CFDCAE");
+
+            entity.Property(e => e.PostId).ValueGeneratedNever();
+        });
+
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6EDC32A859E");
@@ -152,6 +164,13 @@ public partial class DbContextShop : DbContext
             entity.HasOne(d => d.Size).WithMany(p => p.ProductDetails)
                 .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK__ProductDe__SizeI__7D439ABD");
+        });
+
+        modelBuilder.Entity<Promotion>(entity =>
+        {
+            entity.HasKey(e => e.PromotionId).HasName("PK__Promotio__52C42F2FFDC43A8F");
+
+            entity.Property(e => e.PromotionId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<Role>(entity =>

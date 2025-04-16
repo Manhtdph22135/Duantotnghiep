@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace API.Models;
 
@@ -48,6 +47,5 @@ public partial class Staff
     public int RoleId { get; set; }
 
     [InverseProperty("Staff")]
-    [JsonIgnore]
     public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
 }
