@@ -25,6 +25,7 @@ public partial class Product
     public DateTime? CreatedAt { get; set; }
 
     [Column(TypeName = "datetime")]
+
     public DateTime? UpdateAt { get; set; }
 
     public bool? Status { get; set; }
