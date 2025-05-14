@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyShopView", "PolytShopView\PolyShopView.csproj", "{0CC9A847-950E-4492-8D19-AAA558A11485}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{019141E5-913D-4A08-9F53-65F7BEC89A15}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0CC9A847-950E-4492-8D19-AAA558A11485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CC9A847-950E-4492-8D19-AAA558A11485}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CC9A847-950E-4492-8D19-AAA558A11485}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CC9A847-950E-4492-8D19-AAA558A11485}.Release|Any CPU.Build.0 = Release|Any CPU
 		{019141E5-913D-4A08-9F53-65F7BEC89A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{019141E5-913D-4A08-9F53-65F7BEC89A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019141E5-913D-4A08-9F53-65F7BEC89A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
