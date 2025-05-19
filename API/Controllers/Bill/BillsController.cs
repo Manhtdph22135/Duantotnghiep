@@ -49,11 +49,95 @@ namespace API.Controllers.Bill
                             Quantity = bd.Quantity,
                             UnitPrice = bd.UnitPrice,
                             Total = (decimal)bd.Total,
-                            Status = b.Status == false ? 0 : 1
+                            Status = b.Status == false ? 0 : 1,
+                            PaymentMethod = b.PaymentMethod,
+                            Size = sz.SizeName,
+                            Color = clr.ColorName,
+                            Material = mat.MaterialName,
+                            Image = pd.Image
+                        };
+            return await query.ToListAsync();
+        }
+        //[HttpPost("payment")]
+        //public async Task<IActionResult> Payment([FromBody] BillDOT billDOT)
+        //{
+        //    if (billDOT == null)
+        //    {
+        //        return BadRequest("Invalid bill data.");
+        //    }
+        //    var bill = new Models.Bill
+        //    {
+        //        CustomerId = billDOT.CustomerId,
+        //        StaffId = billDOT.StaffId,
+        //        TotalAmount = billDOT.Total,
+        //        CreateAt = DateTime.Now,
+        //        Status = true,
+        //        PaymentMethod = billDOT.PaymentMethod
+        //    };
+        //    _contextShop.Bills.Add(bill);
+        //    await _contextShop.SaveChangesAsync();
+        //    return Ok(bill);
+        //}
+        [HttpGet("hoadon-detail/{id}")]
+        public async Task<ActionResult<IEnumerable<BillDOTDetail>>> GetBillDetailsById(int id)
+        {
+            var query = from bd in _contextShop.BillDetails
+                        join b in _contextShop.Bills on bd.BillId equals b.BillId
+                        join c in _contextShop.Customers on b.CustomerId equals c.CustomerId
+                        join s in _contextShop.Staffs on b.StaffId equals s.StaffId
+                        join pd in _contextShop.ProductDetails on bd.ProductDetailId equals pd.ProductDetailId
+                        join p in _contextShop.Products on pd.ProductId equals p.ProductId
+                        join sz in _contextShop.Sizes on pd.SizeId equals sz.SizeId
+                        join clr in _contextShop.Colors on pd.ColorId equals clr.ColorId
+                        join mat in _contextShop.Materials on pd.MaterialId equals mat.MaterialId
+                        where b.BillId == id
+                        select new BillDOTDetail
+                        {
+                            BillDetailID = b.BillId,
+                            CustomerName = c.FullName,
+                            StaffName = s.FullName,
+                            ProductName = p.ProductName,
+                            CusAddress = c.Address,
+                            Phone = c.Phone,
+                            Quantity = bd.Quantity,
+                            UnitPrice = bd.UnitPrice,
+                            Total = (decimal)bd.Total,
+                            Status = b.Status == false ? 0 : 1,
+                            Size = sz.SizeName,
+                            Color = clr.ColorName,
+                            Material = mat.MaterialName
                         };
             return await query.ToListAsync();
         }
 
+        [HttpGet("hoadon/{phone}")]
+        public async Task<ActionResult<IEnumerable<BillDOT>>> GetBillsByPhone(string phone)
+        {
+            var query = from bd in _contextShop.BillDetails
+                join b in _contextShop.Bills on bd.BillId equals b.BillId
+                join c in _contextShop.Customers on b.CustomerId equals c.CustomerId
+                join s in _contextShop.Staffs on b.StaffId equals s.StaffId
+                join pd in _contextShop.ProductDetails on bd.ProductDetailId equals pd.ProductDetailId
+                join p in _contextShop.Products on pd.ProductId equals p.ProductId
+                join sz in _contextShop.Sizes on pd.SizeId equals sz.SizeId
+                join clr in _contextShop.Colors on pd.ColorId equals clr.ColorId
+                join mat in _contextShop.Materials on pd.MaterialId equals mat.MaterialId
+                where c.Phone.Contains(phone)
+                select new BillDOT
+                {
+                    BillID = b.BillId,
+                    Customer = c.FullName,
+                    Staff = s.FullName,
+                    ProductName = p.ProductName,
+                    CusAddress = c.Address,
+                    Phone = c.Phone,
+                    Quantity = bd.Quantity,
+                    UnitPrice = bd.UnitPrice,
+                    Total = (decimal)bd.Total,
+                    Status = b.Status == false ? 0 : 1
+                };
+            return await query.ToListAsync();
+        }
 
         // GET: api/Bills/5
         [HttpGet("{id}")]
