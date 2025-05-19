@@ -33,6 +33,16 @@ namespace API.Controllers.Products
 
             return products;
         }
+        //[HttpGet("{productName}")]
+        //public async Task<ActionResult<Product>> GetProductByName(string productName)
+        //{
+        //    var products = await _contextShop.Products.FirstOrDefaultAsync(x => x.ProductName == productName);
+        //    if (products == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return products;
+        //}
         // PUT: api/Customer/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProducts(int id, [FromBody] Product product)

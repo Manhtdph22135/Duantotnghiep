@@ -12,6 +12,11 @@
         public decimal UnitPrice { get; set; }
         public decimal Total { get; set; }
         public int Status { get; set; }
+        public string Size { get; set; }
+        public string Color { get; set; }
+        public string Material { get; set; }
+        public string Image { get; set; }
+        public string PaymentMethod { get; set; } // Ví dụ: "Cash", "Credit Card", "Momo", "Bank Transfer"
     }
     public class BillDOTDetail
     {

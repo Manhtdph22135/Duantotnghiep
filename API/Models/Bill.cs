@@ -28,6 +28,9 @@ public partial class Bill
     public decimal TotalAmount { get; set; }
 
     public bool? Status { get; set; }
+    [Required]
+    [StringLength(50)]
+    public string PaymentMethod { get; set; } = null!; // Ví dụ: "Cash", "Credit Card", "Momo", "Bank Transfer"
 
     [InverseProperty("Bill")]
     public virtual ICollection<BillDetail> BillDetails { get; set; } = new List<BillDetail>();

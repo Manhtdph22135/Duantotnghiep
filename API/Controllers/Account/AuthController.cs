@@ -62,5 +62,23 @@ namespace API.Controllers.Account
 
             return Ok(new { message = "Account registered successfully!" });
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] Models.Account model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Check if the username exists  
+            var account = await _contextShop.Accounts.FirstOrDefaultAsync(a => a.Username == model.Username);
+            if (account == null)
+                return Unauthorized(new { message = "Invalid username or password!" });
+
+            // Verify the password  
+            if (account.PasswordHash != model.PasswordHash)
+                return Unauthorized(new { message = "Invalid username or password!" });
+
+            return Ok(new { message = "Login successful!" });
+        }
     }
 }
